@@ -1,3 +1,7 @@
+## 2.0.9-bc (2017-06-01)
+Other
+  - Create a version for Brightcove changes
+
 ## 2.0.9 (2017-05-10)
 
 Backported bugfixes from v2.1.x:
