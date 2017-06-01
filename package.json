@@ -1,7 +1,7 @@
 {
   "name": "@brightcove/shaka-player",
   "description": "DASH/EME video player library",
-  "version": "2.1.2",
+  "version": "2.1.2-bc",
   "homepage": "https://github.com/google/shaka-player",
   "author": "Google",
   "maintainers": [

@@ -1,3 +1,7 @@
+## 2.1.2-bc (2017-06-01)
+Other:
+  - Version the Brightcove fork of Shaka Player under the Brightcove namespace
+
 ## 2.1.2 (2017-05-23)
 
 New features:
