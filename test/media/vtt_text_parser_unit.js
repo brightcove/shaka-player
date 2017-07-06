@@ -21,6 +21,7 @@ describe('VttTextParser', function() {
 
   beforeAll(function() {
     originalVTTCue = window.VTTCue;
+    originalTextTrackCue = window.TextTrackCue;
 
     logWarningSpy = jasmine.createSpy('shaka.log.warning');
     shaka.log.warning = logWarningSpy;
@@ -28,11 +29,13 @@ describe('VttTextParser', function() {
 
   afterAll(function() {
     window.VTTCue = originalVTTCue;
+    window.TextTrackCue = originalTextTrackCue;
   });
 
   beforeEach(function() {
     logWarningSpy.calls.reset();
-    window.VTTCue = function(start, end, text) {
+    window.VTTCue = false;
+    window.TextTrackCue = function(start, end, text) {
       this.startTime = start;
       this.endTime = end;
       this.text = text;
