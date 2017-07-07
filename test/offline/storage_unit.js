@@ -147,7 +147,10 @@ describe('Storage', function() {
         videoCodec: 'avc1.4d401f',
         roles: [],
         videoId: 0,
-        audioId: 1
+        audioId: 1,
+        channelsCount: null,
+        audioBandwidth: null,
+        videoBandwidth: null
       }
     ];
     Promise
@@ -202,7 +205,11 @@ describe('Storage', function() {
       tracks = getVariantTracks(manifest.periods[0], null, null);
       // The expected tracks we get back from the stored version of the content
       // will have 0 for bandwidth, so adjust the tracks list to match.
-      tracks.forEach(function(t) { t.bandwidth = 0; });
+      tracks.forEach(function(t) {
+        t.bandwidth = 0;
+        t.audioBandwidth = null;
+        t.videoBandwidth = null;
+      });
 
       storage.loadInternal = function() {
         return Promise.resolve({
