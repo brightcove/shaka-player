@@ -18,6 +18,7 @@
 describe('VttTextParser', function() {
   var logWarningSpy;
   var originalVTTCue;
+  var originalTextTrackCue;
 
   beforeAll(function() {
     originalVTTCue = window.VTTCue;
@@ -34,7 +35,7 @@ describe('VttTextParser', function() {
 
   beforeEach(function() {
     logWarningSpy.calls.reset();
-    window.VTTCue = false;
+    window.VTTCue = function() {};
     window.TextTrackCue = function(start, end, text) {
       this.startTime = start;
       this.endTime = end;
@@ -46,6 +47,9 @@ describe('VttTextParser', function() {
     verifyHelper([],
         'WEBVTT',
         { periodStart: 0, segmentStart: 0, segmentEnd: 0 });
+
+    // window.VTTCue is not overwritten
+    expect(window.VTTCue.toString()).toBe('function () {}');
   });
 
   it('supports initial comments', function() {
