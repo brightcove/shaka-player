@@ -24,6 +24,7 @@ describe('DrmEngine', function() {
   var onErrorSpy;
   var onKeyStatusSpy;
   var onExpirationSpy;
+  var onSendLicenseAttemptSpy;
 
   var fakeNetEngine;
   var drmEngine;
@@ -55,6 +56,7 @@ describe('DrmEngine', function() {
     onErrorSpy = jasmine.createSpy('onError');
     onKeyStatusSpy = jasmine.createSpy('onKeyStatus');
     onExpirationSpy = jasmine.createSpy('onExpirationUpdated');
+    onSendLicenseAttemptSpy = jasmine.createSpy('onSendLicenseAttempt');
   });
 
   beforeEach(function() {
@@ -73,6 +75,7 @@ describe('DrmEngine', function() {
     logErrorSpy.calls.reset();
     onKeyStatusSpy.calls.reset();
     onExpirationSpy.calls.reset();
+    onSendLicenseAttemptSpy.calls.reset();
 
     // By default, error logs and callbacks result in failure.
     onErrorSpy.and.callFake(fail);
@@ -104,7 +107,7 @@ describe('DrmEngine', function() {
     fakeNetEngine.setResponseMap({ 'http://abc.drm/license': license });
 
     drmEngine = new shaka.media.DrmEngine(
-        fakeNetEngine, onErrorSpy, onKeyStatusSpy, onExpirationSpy);
+        fakeNetEngine, onErrorSpy, onKeyStatusSpy, onExpirationSpy, onSendLicenseAttemptSpy);
     config = {
       retryParameters: retryParameters,
       delayLicenseRequestUntilPlayed: false,
@@ -799,6 +802,7 @@ describe('DrmEngine', function() {
                 method: 'POST',
                 body: message
               }));
+
         }).catch(fail).then(done);
       });
 
